@@ -150,7 +150,23 @@ Database menggunakan PostgreSQL pada Supabase. Konfigurasi koneksi database disi
 
 ## Bukti Pengujian
 
-Pengujian dilakukan menggunakan Thunder Client. Bukti pengujian berupa screenshot request dan response untuk setiap endpoint.
+Pengujian API dilakukan menggunakan Thunder Client. Bukti pengujian berupa screenshot request dan response untuk setiap endpoint.
+
+### 1. GET `/tugas`
+
+![Bukti Pengujian GET](screenshots/GET.png)
+
+### 2. POST `/tugas`
+
+![Bukti Pengujian POST](screenshots/POST.png)
+
+### 3. PUT `/tugas/9`
+
+![Bukti Pengujian PUT](screenshots/PUT.png)
+
+### 4. DELETE `/tugas/9`
+
+![Bukti Pengujian DELETE](screenshots/DELETE.png)
 
 ## Cara Menjalankan Secara Lokal
 
