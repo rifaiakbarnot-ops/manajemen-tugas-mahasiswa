@@ -126,12 +126,12 @@ Database menggunakan PostgreSQL pada Supabase. Konfigurasi koneksi database disi
   }
   ```
 - Response Sukses (200):
-  '''json
+  ```json
   {
-  "message": "Tugas berhasil diperbarui",
-  "tugas_id": 9
+    "message": "Tugas berhasil diperbarui",
+    "tugas_id": 9
   }
-  '''
+  ```
 
 ### 4. Menghapus Tugas
 
@@ -141,12 +141,12 @@ Database menggunakan PostgreSQL pada Supabase. Konfigurasi koneksi database disi
 - Headers : Tidak diperlukan
 - Request Body : Tidak ada
 - Response Sukses (200):
-  '''json
+  ```json
   {
-  "message": "Tugas berhasil dihapus",
-  "tugas_id": 9
+    "message": "Tugas berhasil dihapus",
+    "tugas_id": 9
   }
-  '''
+  ```
 
 ## Bukti Pengujian
 
