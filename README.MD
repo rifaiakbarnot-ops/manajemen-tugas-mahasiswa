@@ -1,10 +1,3 @@
-## Entity Relationship Diagram (ERD)
-
-ERD berikut menggambarkan relasi antara lima tabel dalam
-sistem Manajemen Tugas Mahasiswa.
-
-![ERD Manajemen Tugas Mahasiswa](erd.webp)
-
 # Manajemen Tugas Mahasiswa
 
 REST API untuk mengelola tugas mahasiswa, mulai dari melihat daftar tugas, menambahkan tugas, memperbarui informasi tugas, hingga menghapus tugas.
