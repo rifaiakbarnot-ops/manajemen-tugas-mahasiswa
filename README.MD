@@ -21,7 +21,7 @@ REST API untuk mengelola tugas mahasiswa, mulai dari melihat daftar tugas, menam
 ### Link Proyek
 
 - **GitHub Repository:** https://github.com/rifaiakbarnot-ops/manajemen-tugas-mahasiswa
-- **Live API:** https://manajemen-tugas-mahasiswa-e6nmf9xdw-rifaiakbarnot-ops.vercel.app/
+- **Live API:** https://manajemen-tugas-mahasiswa-git-main-rifaiakbarnot-ops.vercel.app/
 
 ## Entity Relationship Diagram (ERD)
 
@@ -47,7 +47,7 @@ API dapat diakses melalui:
 
 **Base URL**
 
-https://manajemen-tugas-mahasiswa-e6nmf9xdw-rifaiakbarnot-ops.vercel.app
+https://manajemen-tugas-mahasiswa-git-main-rifaiakbarnot-ops.vercel.app/
 
 Database menggunakan PostgreSQL pada Supabase. Konfigurasi koneksi database disimpan melalui environment variable `DATABASE_URL` di Vercel.
 
