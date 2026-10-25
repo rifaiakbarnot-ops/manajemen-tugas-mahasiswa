@@ -44,211 +44,113 @@ https://manajemen-tugas-mahasiswa-git-main-rifaiakbarnot-ops.vercel.app/
 
 Database menggunakan PostgreSQL pada Supabase. Konfigurasi koneksi database disimpan melalui environment variable `DATABASE_URL` di Vercel.
 
-## Dokumentasi Endpoint
+## Dokumentasi Endpoint API
 
-Semua endpoint mengembalikan respons dalam format JSON.
+**Base URL:** `https://manajemen-tugas-mahasiswa.vercel.app`
 
-| Method | Endpoint            | Fungsi                                                    | Status sukses |
-| ------ | ------------------- | --------------------------------------------------------- | ------------- |
-| GET    | `/`                 | Informasi API                                             | 200           |
-| GET    | `/db-check`         | Memeriksa koneksi database                                | 200           |
-| GET    | `/tugas`            | Mendapatkan semua tugas                                   | 200           |
-| GET    | `/tugas/<tugas_id>` | Mendapatkan satu tugas                                    | 200           |
-| POST   | `/tugas`            | Menambahkan tugas                                         | 201           |
-| PUT    | `/tugas/<tugas_id>` | Memperbarui seluruh field wajib dan field yang disertakan | 200           |
-| PATCH  | `/tugas/<tugas_id>` | Memperbarui field tertentu                                | 200           |
-| DELETE | `/tugas/<tugas_id>` | Menghapus tugas                                           | 200           |
+### 1. Menampilkan Semua Tugas
 
-### 1. GET — Semua Tugas
+- Method : GET
+- URL : https://manajemen-tugas-mahasiswa.vercel.app/tugas
+- Deskripsi : Menampilkan seluruh data tugas mahasiswa
+- Headers : Tidak diperlukan
+- Request Body : Tidak ada
+- Response Sukses (200):
+  ```json
+  {
+    "data": [
+      {
+        "tugas_id": 1,
+        "judul": "Latihan Soal Kalkulus I",
+        "deskripsi": "Mengerjakan latihan soal untuk persiapan UTS.",
+        "mahasiswa_id": 1,
+        "mata_kuliah_id": 1,
+        "prioritas_id": 3,
+        "status_id": 1,
+        "deadline": "2026-10-30T12:00:00",
+        "link_tugas": null,
+        "lokasi_pengumpulan": "Kertas Folio",
+        "tanggal_dibuat": "2026-10-25T13:05:22.747778"
+      }
+    ]
+  }
+  ```
+  _Catatan: contoh di atas dipersingkat; gunakan seluruh response GET aktual jika ingin mendokumentasikan semua data._
 
-**Request**
+### 2. Menambahkan Tugas Baru
 
-`GET /tugas`
-
-**Contoh response**
-
-```json
-{
-  "data": [
-    {
-      "tugas_id": 1,
-      "mahasiswa_id": 1,
-      "mata_kuliah_id": 1,
-      "status_id": 1,
-      "prioritas_id": 3,
-      "judul": "Latihan Soal Kalkulus I",
-      "deskripsi": "Mengerjakan latihan soal untuk persiapan UTS.",
-      "deadline": "2026-10-30T12:00:00",
-      "tanggal_dibuat": "2026-10-25T13:05:22.747778",
-      "link_tugas": null,
-      "lokasi_pengumpulan": "Kertas Folio"
-    }
-  ]
-}
-```
-
-Response aktual dapat berisi lebih dari satu data tugas.
-
-### 2. GET — Satu Tugas
-
-**Request**
-
-`GET /tugas/1`
-
-**Contoh response**
-
-```json
-{
-  "data": {
-    "tugas_id": 1,
+- Method : POST
+- URL : https://manajemen-tugas-mahasiswa.vercel.app/tugas
+- Deskripsi : Menambahkan tugas baru
+- Headers : Content-Type: application/json
+- Request Body :
+  ```json
+  {
     "mahasiswa_id": 1,
     "mata_kuliah_id": 1,
+    "prioritas_id": 1,
     "status_id": 1,
-    "prioritas_id": 3,
-    "judul": "Latihan Soal Kalkulus I",
-    "deskripsi": "Mengerjakan latihan soal untuk persiapan UTS.",
-    "deadline": "2026-10-30T12:00:00",
-    "tanggal_dibuat": "2026-10-25T13:05:22.747778",
-    "link_tugas": null,
-    "lokasi_pengumpulan": "Kertas Folio"
+    "judul": "Tugas Uji API",
+    "deskripsi": "Pengujian endpoint POST",
+    "deadline": "2026-11-30 23:59:00",
+    "link_tugas": "https://example.com/tugas",
+    "lokasi_pengumpulan": "Google Classroom"
   }
-}
-```
+  ```
+- Response Sukses (201):
+  ```json
+  {
+    "message": "Tugas berhasil ditambahkan",
+    "tugas_id": 9
+  }
+  ```
 
-Jika tugas tidak ditemukan, API mengembalikan status `404 Not Found`.
+### 3. Memperbarui Tugas
 
-### 3. POST — Menambahkan Tugas
-
-**Request**
-
-`POST /tugas`
-
-Header:
-
-`Content-Type: application/json`
-
-**Request body**
-
-```json
-{
-  "mahasiswa_id": 1,
-  "mata_kuliah_id": 1,
-  "status_id": 1,
-  "prioritas_id": 2,
-  "judul": "Tes API Vercel",
-  "deskripsi": "Data untuk pengujian endpoint POST",
-  "deadline": "2026-11-05T23:59:00",
-  "link_tugas": null,
-  "lokasi_pengumpulan": "Pengujian API"
-}
-```
-
-**Contoh response — `201 Created`**
-
-```json
-{
-  "judul": "Tes API Vercel",
-  "message": "Tugas berhasil ditambahkan",
-  "tugas_id": 6
-}
-```
-
-ID yang diberikan database dapat berbeda pada pengujian berikutnya.
-
-### 4. PUT — Memperbarui Tugas
-
-**Request**
-
-`PUT /tugas/6`
-
-**Request body**
-
-```json
-{
-  "mahasiswa_id": 1,
-  "mata_kuliah_id": 1,
-  "status_id": 2,
-  "prioritas_id": 2,
-  "judul": "Tes API Vercel - Diperbarui",
-  "deskripsi": "Pengujian PUT berhasil",
-  "deadline": "2026-11-06T23:59:00",
-  "link_tugas": null,
-  "lokasi_pengumpulan": "Pengujian API"
-}
-```
-
-**Contoh response — `200 OK`**
-
-```json
-{
+- Method : PUT
+- URL : https://manajemen-tugas-mahasiswa.vercel.app/tugas/ID_TUGAS
+- Deskripsi : Memperbarui data tugas berdasarkan ID
+- Headers : Content-Type: application/json
+- Request Body :
+  ```json
+  {
+    "mahasiswa_id": 1,
+    "mata_kuliah_id": 1,
+    "prioritas_id": 2,
+    "status_id": 2,
+    "judul": "Tugas Uji API - Diperbarui",
+    "deskripsi": "Pengujian endpoint PUT",
+    "deadline": "2026-12-01 23:59:00",
+    "link_tugas": "https://example.com/tugas-revisi",
+    "lokasi_pengumpulan": "Google Classroom"
+  }
+  ```
+- Response Sukses (200):
+  '''json
+  {
   "message": "Tugas berhasil diperbarui",
-  "tugas_id": 6
-}
-```
+  "tugas_id": 9
+  }
+  '''
 
-PUT membutuhkan semua field wajib. Gunakan ID tugas yang benar-benar tersedia ketika melakukan pengujian.
+### 4. Menghapus Tugas
 
-### 5. PATCH — Memperbarui Sebagian Data
-
-**Request**
-
-`PATCH /tugas/1`
-
-**Request body**
-
-```json
-{
-  "judul": "Latihan Kalkulus I - Revisi"
-}
-```
-
-**Contoh response — `200 OK`**
-
-```json
-{
-  "message": "Tugas berhasil diperbarui",
-  "tugas_id": 1
-}
-```
-
-Contoh ini mengubah judul tugas nomor 1. Gunakan data uji jika tidak ingin mengubah data utama.
-
-### 6. DELETE — Menghapus Tugas
-
-**Request**
-
-`DELETE /tugas/6`
-
-**Contoh response — `200 OK`**
-
-```json
-{
+- Method : DELETE
+- URL : https://manajemen-tugas-mahasiswa.vercel.app/tugas/ID_TUGAS
+- Deskripsi : Menghapus tugas berdasarkan ID
+- Headers : Tidak diperlukan
+- Request Body : Tidak ada
+- Response Sukses (200):
+  '''json
+  {
   "message": "Tugas berhasil dihapus",
-  "tugas_id": 6
-}
-```
+  "tugas_id": 9
+  }
+  '''
 
-Jika ID tugas tidak ditemukan, API mengembalikan status `404 Not Found`.
+## Bukti Pengujian
 
-## Penanganan Error
-
-API menggunakan status HTTP untuk menunjukkan hasil permintaan.
-
-| Status | Keterangan                         |
-| ------ | ---------------------------------- |
-| 200    | Permintaan berhasil                |
-| 201    | Data berhasil dibuat               |
-| 400    | Request atau data tidak valid      |
-| 404    | Data tugas tidak ditemukan         |
-| 500    | Pemeriksaan koneksi database gagal |
-
-Contoh response error:
-
-```json
-{
-  "error": "Tugas tidak ditemukan"
-}
-```
+Pengujian dilakukan menggunakan Thunder Client. Bukti pengujian berupa screenshot request dan response untuk setiap endpoint.
 
 ## Cara Menjalankan Secara Lokal
 
